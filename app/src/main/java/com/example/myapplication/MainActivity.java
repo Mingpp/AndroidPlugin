@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.net.OkhttpUtils;
 
+import com.example.myapplication.net.OkHttpAndIntercept;
+
 public class MainActivity extends AppCompatActivity {
 
     private Button button;
@@ -51,7 +53,11 @@ public class MainActivity extends AppCompatActivity {
                 new Thread(){
                    public void run(){
                        try {
-                         String s =  OkhttpUtils.getInstance().doGet("http://180.101.50.242/").substring(0,5);
+//                         String s =  OkhttpUtils.getInstance().doGet("https://www.baidu.com").substring(0,5);
+                           String s =  OkHttpAndIntercept.getResponseString("https://www.baidu.com");
+                           if(s != null && s.length() > 5){
+                               String ss = s.substring(0,5);
+                           }
                          handler.post(new Runnable() {
                              @Override
                              public void run() {

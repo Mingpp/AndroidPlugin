@@ -35,13 +35,14 @@ public class OkHttpAndIntercept {
                 return response.body() != null ? response.body().string() : null;
             } else {
                 // 请求失败，返回 null 或处理错误
+
                 System.err.println("Request failed with code: " + response.code());
-                return null;
+                return response.body() != null ? response.body().string() : null;
             }
         } catch (IOException e) {
             // 捕获异常并处理
             e.printStackTrace();
-            return null;
+            return e.getMessage();
         }
 
     }
