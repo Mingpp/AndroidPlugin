@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
+//    id("com.ccts.myplugin.head-plugin") version "1.0.0"
 }
+
 
 android {
     namespace = "com.example.myapplication"
@@ -8,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.myapplication"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -29,6 +31,23 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
+    // 其他的配置项
+    packaging {
+        resources {
+            excludes += "xsd/catalog.xml"
+            excludes += "META-INF/**"
+//            excludes += "META-INF/AL2.0"
+//            excludes += "META-INF/LGPL2.1"
+//
+//            excludes += "META-INF/DEPENDENCIES"
+//            excludes += "META-INF/LICENSE.md"
+//            excludes += "META-INF/NOTICE.md"
+//            excludes += "META-INF/io.netty.versions.properties"
+        }
+    }
+
+
 }
 
 dependencies {
@@ -38,8 +57,24 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
+    implementation("org.ow2.asm:asm:9.4")
+    implementation("org.ow2.asm:asm-util:9.4")
+    implementation("com.ccts.myplugin:head-plugin:1.0.0")
+
+//    implementation("jakarta.activation:jakarta.activation-api:1.2.1") {
+//            exclude(group = "com.sun.activation", module = "javax.activation")
+//    }
+//    implementation("com.sun.activation:javax.activation:1.2.0") {
+//        exclude(group = "jakarta.activation", module = "jakarta.activation-api")
+//    }
+
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+}
+configurations.all {
+    exclude(group = "com.sun.activation", module = "javax.activation")
+    exclude(group = "jakarta.activation", module = "jakarta.activation-api")
 }

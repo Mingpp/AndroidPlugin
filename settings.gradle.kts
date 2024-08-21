@@ -1,8 +1,8 @@
 pluginManagement {
     repositories {
-        maven(url = "https://maven.aliyun.com/repository/google")
-        maven(url = "https://maven.aliyun.com/repository/central")
-        maven(url = "https://maven.aliyun.com/repository/gradle-plugin")
+//        maven(url = "https://maven.aliyun.com/repository/google")
+//        maven(url = "https://maven.aliyun.com/repository/central")
+//        maven(url = "https://maven.aliyun.com/repository/gradle-plugin")
         google {
             content {
                 includeGroupByRegex("com\\.android.*")
@@ -10,8 +10,12 @@ pluginManagement {
                 includeGroupByRegex("androidx.*")
             }
         }
+        maven {
+            url = uri("D:\\release\\repo") // 指定本地仓库路径
+        }
+//        mavenLocal()
         mavenCentral()
-        gradlePluginPortal()
+//        gradlePluginPortal()
     }
 }
 dependencyResolutionManagement {
@@ -21,6 +25,9 @@ dependencyResolutionManagement {
         // 使用阿里镜像源
         maven(url = "https://maven.aliyun.com/repository/google")
         maven(url = "https://maven.aliyun.com/repository/central")
+        maven {
+            url = uri("D:\\release\\repo") // 指定本地仓库路径
+        }
         google()
         mavenCentral()
     }
