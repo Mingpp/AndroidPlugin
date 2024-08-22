@@ -1,0 +1,36 @@
+plugins {
+    id 'java-library'
+}
+
+
+gradlePlugin {
+    plugins {
+        //MyTestPlugin { //这种方式也行
+        create("MyPlugin") {
+            //插件id
+            id = 'com.ccts.myplugin'
+            //插件的包名+类名
+            implementationClass = 'com.ccts.myplugin.MyPlugin'
+        }
+    }
+}
+println("原本的version:" + version)
+println("原本的group:" + group)
+
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+    implementation 'com.android.tools.build:gradle:8.0.0' // Android Gradle 插件依赖
+    implementation 'commons-io:commons-io:2.11.0'
+    // Add ASM dependency if needed
+    implementation 'org.ow2.asm:asm:9.5'
+    implementation 'org.ow2.asm:asm-commons:9.5'
+    implementation "com.squareup.okhttp3:okhttp:4.11.0"
+
+    testImplementation 'junit:junit:4.13.2'
+}
