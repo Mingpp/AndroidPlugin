@@ -1,0 +1,87 @@
+//plugins {
+//    id 'java-library'
+//}
+//
+//java {
+//    sourceCompatibility = JavaVersion.VERSION_17
+//    targetCompatibility = JavaVersion.VERSION_17
+//}
+//
+//
+
+
+plugins {
+    id 'java-library'
+    id 'java-gradle-plugin'
+    id 'maven-publish'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+gradlePlugin {
+    plugins {
+        //MyTestPlugin { //这种方式也行
+        create("MyPlugin") {
+            //插件id
+            id = 'com.ccts.highplugin'
+            //插件的包名+类名
+            implementationClass = 'com.ccts.highplugin.HighPlugin'
+        }
+    }
+}
+println("原本的version:" + version)
+println("原本的group:" + group)
+
+//设置group
+group = 'com.ccts.highplugin'
+//设置版本号
+version = "1.0.0"
+
+println("设置后的group:" + group)
+println("设置后的version:" + version)
+
+afterEvaluate {
+    /*
+    这部分代码不需要配置，会根据gradlePlugin中的进行生成
+    除非使用老版本的插件依赖方式(classpath):需要指定artifactId的情况下，才需要使用
+    publications {
+        maven(MavenPublication) {
+            groupId = group
+            artifactId = 'MyPlugin'
+            version = version
+
+            from components.java
+        }
+    }*/
+    publishing {
+        // 配置仓库地址
+        repositories {
+            maven {
+                url = uri('D:/release/repo')
+            }
+        }
+    }
+}
+
+
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+    implementation 'com.android.tools.build:gradle:8.0.0' // Android Gradle 插件依赖
+    implementation 'commons-io:commons-io:2.11.0'
+    // Add ASM dependency if needed
+    implementation 'org.ow2.asm:asm:9.5'
+    implementation 'org.ow2.asm:asm-commons:9.5'
+    implementation "com.squareup.okhttp3:okhttp:4.11.0"
+
+    testImplementation 'junit:junit:4.13.2'
+}
+

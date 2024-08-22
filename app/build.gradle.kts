@@ -1,6 +1,8 @@
+import com.ccts.highplugin.HighTransformTask
+
 plugins {
     alias(libs.plugins.android.application)
-    id("com.ccts.headplugin") version "1.0.0"
+    id("com.ccts.highplugin") version "1.0.0"
 
 }
 

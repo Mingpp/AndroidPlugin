@@ -26,9 +26,9 @@ dependencyResolutionManagement {
         // 使用阿里镜像源
         maven(url = "https://maven.aliyun.com/repository/google")
         maven(url = "https://maven.aliyun.com/repository/central")
-//        maven {
-//            url = uri("D:\\release\\repo") // 指定本地仓库路径
-//        }
+        maven {
+            url = uri("D:\\release\\repo") // 指定本地仓库路径
+        }
         google()
         mavenCentral()
     }
@@ -51,3 +51,4 @@ dependencyResolutionManagement {
 rootProject.name = "My Application"
 include(":app")
 include(":headplugin")
+include(":highplugin")

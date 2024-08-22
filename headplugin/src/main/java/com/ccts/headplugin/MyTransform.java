@@ -104,25 +104,6 @@ public class MyTransform extends Transform {
         ClassReader cr = new ClassReader(fis);// 通过IO流，将一个class解析出来，解析失败会抛异常
         ClassWriter cw = new ClassWriter(cr, 0);//再构建一个writer
         OkHttpClientClassVisitor cv = new OkHttpClientClassVisitor(cw);
-
-
-//        ClassVisitor cv = new ClassVisitor(Opcodes.ASM5, cw) {
-//            public MethodVisitor visitMethod(int access, final String name, String desc,
-//                                             String signature, String[] exceptions) {
-//                MethodVisitor mv = super.visitMethod(access, name, desc, signature, exceptions);
-//                mv = new MethodVisitor(Opcodes.ASM5, mv) {
-//                    @Override
-//                    public void visitInsn(int opcode) {
-//                        //就是在构造函数中 插入一段Class clazz = Antilazyload.class的代码
-//                        if ("<init>".equals(name) && opcode == Opcodes.RETURN) {
-//                            super.visitLdcInsn(Type.getType("Lcom/android/androiddemo/Antilazyload;"));//在class的构造函数中插入一行代码
-//                        }
-//                        super.visitInsn(opcode);
-//                    }
-//                };
-//                return mv;
-//            }
-//        };
         cr.accept(cv, 0);
         return cw.toByteArray();
     }
