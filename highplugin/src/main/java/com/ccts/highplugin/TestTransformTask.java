@@ -36,7 +36,7 @@ public class TestTransformTask  {
         if (inputDir == null || outputDir == null) {
             throw new IllegalArgumentException("Input and output directories must be set");
         }
-        if(inputDir.exists() && inputDir.isDirectory()) {
+        if(! inputDir.exists() || !inputDir.isDirectory()) {
             throw new IllegalArgumentException("inputDir文件夹不存在");
         }
         if(! outputDir.exists() || ! outputDir.isDirectory()) {
